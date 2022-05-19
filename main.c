@@ -1,5 +1,0 @@
-i
-qwawd
-
-awdawd
-i
