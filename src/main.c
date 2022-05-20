@@ -54,6 +54,7 @@ int main(int ac, char **argv, char **env)
 
 //	shell_level(inf);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
+//    pipee_test();
     start_shell(inf);
 }
 

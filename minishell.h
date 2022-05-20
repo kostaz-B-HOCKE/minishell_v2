@@ -37,18 +37,6 @@ typedef struct  s_link
     struct  s_link *next;
 }           t_link;
 
-typedef struct  s_pipels
-{
-    char        *str;
-    struct s_pipels *next;
-}   t_pipels;
-
-
-
-
-
-
-
 typedef struct	s_env
 {
     char			*str;
@@ -97,9 +85,35 @@ char	*ft_gap2(char *str, int *i, char c, t_info *inf);
 
 //utilus.c
 char	*ft_strjoin_free(char *s1, char *s2);
+void	print_error(char *error, char *str);
 
 //ft_dollar.c
 char	*ft_dollar_pv(char *str, int *i, char **env);
+
+//pipe_test.c
+void    pipee_test(void);
+//logic
+//__++++++++++++++++
+//check_cmd.c
+void    cheak_cmd(t_info *inf);
+
+//1_utilus.c
+int	ftt_strcmp(const char *s1, const char *s2);
+void	free_arr(char **arr);
+void    printf_dstr(char **super_str);
+
+//ftt_echo.c
+void    ftt_echo(t_info *inf);
+char    **porting_link_str(t_info *info);
+
+//ft_exit.c
+void	ftt_exit(char **code);
+
+//ft_pwd.c
+void	ftt_pwd(t_info *inf);
+
+//ft_export.c
+void    ft_export(t_info *inf);
 
 
 #endif

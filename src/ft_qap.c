@@ -1,7 +1,6 @@
 #include "../minishell.h"
 
 //препарсинг
-
 int prepars(char *str, int *i, char c)
 {
     while(str[++(*i)])
@@ -46,6 +45,7 @@ char *prepars_two(char *str, int *i, char c, t_info *inf)
         if (str[(*i)] == c)
             return (str);
     }
+    printf("%s: %s\n", ERROR_NAME, "Error! Unclosed dquote");
     free(str);
     return (NULL);
 }

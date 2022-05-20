@@ -23,6 +23,7 @@ char	*delete_spese(char *str)
     return (str);
 }
 
+//возвращает 2мер массив выдеена память
 char    **porting_env(t_info *info)
 {
     t_env   *tmp;
@@ -36,7 +37,7 @@ char    **porting_env(t_info *info)
         i++;
         tmp = tmp->next;
     }
-    super_str = (char **)malloc(sizeof(char *) * (i + 1));
+    super_str = (char **)malloc(sizeof(char *) * (i + 2));
     if (!super_str)
         return (NULL);
     i = 0;
@@ -98,19 +99,17 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i)
     }
     if (ft_strlen(str) != 0)
         link_to_str(str, inf);
-
-    print_list_pipels(inf);
+//    print_list_pipels(inf);
 //    put_link_to_pipe(inf);
 //    print_list_pipels(inf);
-//  print_me_link(inf);
+//    print_me_link(inf);
+
 //	printf("++++++++++++++++++++++++++++++++++++++\n%s\n", str);
     return (str);
 }
 
-
 void    parsing_s(t_info *inf, char *str)
 {
-    t_pipels	*tmp;
     int			i;
 
     i = -1;
@@ -121,4 +120,7 @@ void    parsing_s(t_info *inf, char *str)
     }
     str = delete_spese(str);
     str = chek_symbol_str(inf, str,	&i);
+
+    cheak_cmd(inf);
+    free_link(&inf->link);
 }
