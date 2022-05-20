@@ -7,6 +7,7 @@ void	ftt_pwd(t_info *inf)
     t_env	*tmp;
 
 //    fd = init_logic_fd(inf);
+    fd = 1;
     tmp = inf->env_lst;
     flag = 1;
     while (tmp != NULL)
@@ -26,5 +27,4 @@ void	ftt_pwd(t_info *inf)
     }
     else
         gl_exit = 0;
-//    close_fds(inf->pipels->fd_in, inf->pipels->fd_out, inf->pipels->fr_re_out);
 }

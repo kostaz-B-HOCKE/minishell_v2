@@ -42,6 +42,54 @@ void    start_shell(t_info *inf)
     }
 }
 
+//????????
+
+
+void	execute(char *argv, char **env)
+{
+    char	**cmd;
+    int 	i;
+    char	*path;
+
+    i = -1;
+    cmd = ft_split(argv, ' ');
+//    path = find_path(cmd[0], inf);
+    path = "/bin/cat";
+    if (!path)
+    {
+        while (cmd[++i])
+            free(cmd[i]);
+        free(cmd);
+        exit(EXIT_FAILURE);
+    }
+    if (execve(path, cmd, env) == -1)
+        exit(EXIT_FAILURE);
+}
+
+void	child_process(char **env)
+{
+    pid_t	pid;
+    int		fd[2];
+
+    if (pipe(fd) == -1)
+        exit(EXIT_FAILURE);
+    pid = fork();
+    if (pid == -1)
+        exit(EXIT_FAILURE);
+    if (pid == 0)
+    {
+        close(fd[0]);
+        dup2(fd[1], STDOUT_FILENO);
+        execute("cat", env);
+    }
+    else
+    {
+        close(fd[1]);
+        dup2(fd[0], STDIN_FILENO);
+        waitpid(pid, NULL, 0);
+    }
+}
+
 int main(int ac, char **argv, char **env)
 {
     t_info	*inf;
@@ -51,10 +99,10 @@ int main(int ac, char **argv, char **env)
     inf = init_info(env);
 
 //    print_me_env(inf);
-
+    child_process(env);
 //	shell_level(inf);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
-    start_shell(inf);
+//    start_shell(inf);
 }
 

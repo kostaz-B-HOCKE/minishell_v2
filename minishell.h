@@ -92,6 +92,7 @@ char	*ft_dollar_pv(char *str, int *i, char **env);
 
 //pipe_test.c
 void    pipee_test(void);
+int	ft_pipex(t_info *inf);
 //logic
 //__++++++++++++++++
 //check_cmd.c

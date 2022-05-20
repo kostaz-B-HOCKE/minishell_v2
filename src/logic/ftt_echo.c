@@ -29,7 +29,6 @@ char    **porting_link_str(t_info *info)
     return (super_str);
 }
 
-
 void    ftt_echo(t_info *inf)
 {
     int i;
