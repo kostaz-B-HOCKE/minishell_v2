@@ -82,6 +82,7 @@ t_link  *list_new_mini(char *str);
 void    link_add_list(t_link **old, t_link *new);
 void    free_link(t_link **link);
 int     link_size(t_link *link);
+void    free_env_ls(t_env **link);
 
 //ft_qap.c
 char	*ft_gap(char *str, int *i, char c);
@@ -122,6 +123,7 @@ void	ftt_pwd(t_info *inf);
 void    ft_export(t_info *inf);
 void    ex_env_addendum(t_env *env_ls, char *replec);
 void    search_env(t_env *env_ls, char *str);
+char    *search_env_util(char *input);
 
 //ft_unset.c
 void    ft_unset(t_info *inf);

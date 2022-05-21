@@ -120,7 +120,8 @@ void    parsing_s(t_info *inf, char *str)
     }
     str = delete_spese(str);
     str = chek_symbol_str(inf, str,	&i);
-
     cheak_cmd(inf);
+
     free_link(&inf->link);
+//    free_env_ls(&inf->env_lst);
 }

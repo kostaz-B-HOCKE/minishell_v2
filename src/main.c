@@ -32,7 +32,7 @@ void    start_shell(t_info *inf)
 
     while (1)
     {
-        sig_handler();
+        sig_handler(); //contrl +D дает сегу
         str = readline("mimishell: ");
         if (!ft_strcmp(str, "./minishell"))
             shell_level(inf);
@@ -41,6 +41,7 @@ void    start_shell(t_info *inf)
         if (ft_strlen(str) != 0)
             add_history(str);
         parsing_s(inf, str);
+//        free_env_ls(&inf->env_lst);
     }
 }
 
