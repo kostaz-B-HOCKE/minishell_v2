@@ -99,10 +99,10 @@ int main(int ac, char **argv, char **env)
     inf = init_info(env);
 
 //    print_me_env(inf);
-    child_process(env);
+//    child_process(env);
 //	shell_level(inf);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
-//    start_shell(inf);
+    start_shell(inf);
 }
 

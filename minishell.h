@@ -64,6 +64,7 @@ void    print_list_pipels(t_info *inf);
 
 //init.c
 t_info	*init_info(char **env);
+t_env	*lst_new_env(char *str);
 
 
 //parsing.c
@@ -102,6 +103,7 @@ void    cheak_cmd(t_info *inf);
 int	ftt_strcmp(const char *s1, const char *s2);
 void	free_arr(char **arr);
 void    printf_dstr(char **super_str);
+int	ft_strcmp(const char *s1, const char *s2);//utilus.c
 
 //ftt_echo.c
 void    ftt_echo(t_info *inf);
