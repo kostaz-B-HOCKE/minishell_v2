@@ -4,7 +4,7 @@ SRB_DIR		= src/
 
 SRB		= $(addprefix $(SRB_DIR), main.c init.c parsing.c ft_qap.c ft_dollar.c list_command.c \
 								list_command_util.c utilus.c	pipex_test.c	logic/check_cmd.c	1_utilus.c		\
-											logic/ftt_echo.c	logic/ft_exit.c						\
+								shlv.c logic/ftt_echo.c	logic/ft_exit.c	logic/ft_unset.c	\
 								logic/ft_pwd.c	logic/ft_export.c\
 								)
 

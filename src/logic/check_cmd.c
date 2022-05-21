@@ -12,6 +12,8 @@ void    cheak_cmd(t_info *inf)
         ftt_exit(porting_link_str(inf));
     else if (ftt_strcmp(inf->link->str, "export") == 0)
         ft_export(inf);
+    else if (ftt_strcmp(inf->link->str, "unset") == 0)
+        ft_unset(inf);
 //    sle
 //        ftt_pwd(inf);
 

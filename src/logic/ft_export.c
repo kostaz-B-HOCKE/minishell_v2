@@ -66,7 +66,7 @@ void    ex_env_addendum(t_env *env_ls, char *replec)
 //    free(input);
 }
 
-char    *search_env(t_env *env_ls, char *str)
+void    search_env(t_env *env_ls, char *str)
 {
     char *see_str;
     char *see_link_str;
@@ -95,23 +95,23 @@ char    *search_env(t_env *env_ls, char *str)
         export_list_env(&env_ls, str);
     free(see_link_str);
     free(see_str);
-    return (NULL);
 }
 
 void    ft_export(t_info *inf)
 {
     t_link  *tmp;
 
-//    printf("DOT:%s\n", search_env_util(inf->link->next->str));
-    if (inf->link->next)
-    {
-        search_env(inf->env_lst, inf->link->next->str);
-//        tmp = inf->link->next;
-//        if (ft_strchr(tmp->str, '='))
-//        {
-//            export_list_env(&inf->env_lst, "TTTT");
-//            print_me_env(inf);
-//        printf("$1:%s\n", search_env(inf->env_lst, tmp->str));
-//        }
-    }
+    tmp = inf->link->next;
+        while (tmp->next)
+        {
+            if (ft_isalpha(tmp->str[0]))
+                search_env(inf->env_lst, tmp->str);
+            else
+                printf("export: `str': not a valid identifier\n");
+            tmp = tmp->next;
+        }
+        if (ft_isalpha(tmp->str[0]))
+            search_env(inf->env_lst, tmp->str);
+        else
+            printf("export: `str': not a valid identifier\n");
 }

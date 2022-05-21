@@ -44,16 +44,20 @@ void	shell_level(t_info *inf)
     int		lvl;
 
     tmp = inf->env_lst;
+    printf("!\n");
     while (tmp)
     {
         if (!ft_strncmp(tmp->str, "SHLVL=", 6))
+        {
+            printf("str:%s\n", str);
             str = ft_substr(tmp->str, 6, ft_strlen(tmp->str) - 6);
+        }
         tmp = tmp->next;
     }
-    shell_level_pars(inf, str);
-    lvl = ft_atoi(str);
-    lvl++;
-    inf->shlvl = ft_itoa(lvl);
-    free(str);
+//    shell_level_pars(inf, str);
+//    lvl = ft_atoi(str);
+//    lvl++;
+//    inf->shlvl = ft_itoa(lvl);
+//    free(str);
 }
 

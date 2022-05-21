@@ -67,6 +67,9 @@ t_info	*init_info(char **env);
 t_env	*lst_new_env(char *str);
 
 
+//shlv.c
+void	shell_level(t_info *inf);
+
 //parsing.c
 void    parsing_s(t_info *inf, char *str);
 char    **porting_env(t_info *info);
@@ -117,6 +120,9 @@ void	ftt_pwd(t_info *inf);
 
 //ft_export.c
 void    ft_export(t_info *inf);
+
+//ft_unset.c
+void    ft_unset(t_info *inf);
 
 
 #endif
