@@ -34,6 +34,8 @@ void    start_shell(t_info *inf)
     {
         sig_handler();
         str = readline("mimishell: ");
+        if (!ft_strcmp(str, "./minishell"))
+            shell_level(inf);
         if (!str)
             break ;
         if (ft_strlen(str) != 0)
@@ -43,8 +45,6 @@ void    start_shell(t_info *inf)
 }
 
 //????????
-
-
 void	execute(char *argv, char **env)
 {
     char	**cmd;
@@ -98,9 +98,9 @@ int main(int ac, char **argv, char **env)
     gl_exit = 0;
     inf = init_info(env);
 
+    shell_level(inf);
 //    print_me_env(inf);
 //    child_process(env);
-//	shell_level(inf);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
     start_shell(inf);

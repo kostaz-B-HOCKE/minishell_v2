@@ -60,7 +60,7 @@ void    ex_env_addendum(t_env *env_ls, char *replec)
         ;
     str = ft_substr(input, 0, i + 1);
     str1 = ft_substr(replec, i + 1, ft_strlen(replec) - i);
-    free(env_ls->str);
+//    free(env_ls->str);
     input = ft_strjoin_free(str, str1);
     env_ls->str = input;
 //    free(input);
@@ -79,7 +79,8 @@ void    search_env(t_env *env_ls, char *str)
     while (tmp->next)
     {
         see_link_str = search_env_util(tmp->str);
-        if (!ft_strcmp(see_str, see_link_str)) {
+        if (!ft_strcmp(see_str, see_link_str))
+        {
             flag = 1;
             ex_env_addendum(tmp, str);
         }
@@ -101,9 +102,9 @@ void    ft_export(t_info *inf)
 {
     t_link  *tmp;
 
-    tmp = inf->link->next;
-        while (tmp->next)
-        {
+    if (inf->link->next) {
+        tmp = inf->link->next;
+        while (tmp->next) {
             if (ft_isalpha(tmp->str[0]))
                 search_env(inf->env_lst, tmp->str);
             else
@@ -114,4 +115,5 @@ void    ft_export(t_info *inf)
             search_env(inf->env_lst, tmp->str);
         else
             printf("export: `str': not a valid identifier\n");
+    }
 }

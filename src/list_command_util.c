@@ -33,6 +33,20 @@ void    free_link(t_link **link)
     {
         tmp = *link;
         *link = (*link)->next;
+        free(tmp->str);
+        free(tmp);
+    }
+}
+
+void    free_env_ls(t_env **link)
+{
+    t_env *tmp;
+
+    while (*link)
+    {
+        tmp = *link;
+        *link = (*link)->next;
+        free(tmp->str);
         free(tmp);
     }
 }
