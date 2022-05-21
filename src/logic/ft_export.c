@@ -87,7 +87,7 @@ void    search_env(t_env *env_ls, char *str)
         free(see_link_str);
         tmp = tmp->next;
     }
-    see_link_str = search_env_util(tmp->str);
+//    see_link_str = search_env_util(tmp->str);
     if (!ft_strcmp(see_str, see_link_str)) {
         flag = 1;
         ex_env_addendum(tmp, str);

@@ -121,6 +121,7 @@ void	ftt_pwd(t_info *inf);
 //ft_export.c
 void    ft_export(t_info *inf);
 void    ex_env_addendum(t_env *env_ls, char *replec);
+void    search_env(t_env *env_ls, char *str);
 
 //ft_unset.c
 void    ft_unset(t_info *inf);

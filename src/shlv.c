@@ -77,7 +77,9 @@ void	shell_level(t_info *inf)
 {
     t_env	*tmp;
     char	*str;
+    int     flag;
 
+    flag = 0;
     tmp = inf->env_lst;
     while (tmp)
     {
@@ -86,13 +88,11 @@ void	shell_level(t_info *inf)
             str = ft_substr(tmp->str, 6, ft_strlen(tmp->str) - 6);
             shell_level_pars(tmp, str);
             free(str);
+            flag = 1;
         }
         tmp = tmp->next;
     }
-//    shell_level_pars(inf, str);
-//    lvl = ft_atoi(str);
-//    lvl++;
-//    inf->shlvl = ft_itoa(lvl);
-//    free(str);
+    if (flag == 0)
+        search_env(inf->env_lst, "SHLVL=1");
 }
 
