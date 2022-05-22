@@ -56,6 +56,7 @@ void    ex_env_addendum(t_env *env_ls, char *replec)
     char *str;
     char *str1;
     char    *input;
+    t_env   *tmp;
 
     i = -1;
     input = env_ls->str;
@@ -65,40 +66,41 @@ void    ex_env_addendum(t_env *env_ls, char *replec)
     str1 = ft_substr(replec, i + 1, ft_strlen(replec) - i);
 //    free(env_ls->str);
     input = ft_strjoin_free(str, str1);
+    tmp = env_ls;
     env_ls->str = input;
-//    free(input);
+    free(tmp->str);
 }
 
 void    search_env(t_env *env_ls, char *str)
 {
-    char *see_str;
-    char *see_link_str;
+    char *str1;
+    char *str2;
     t_env   *tmp;
     int     flag;
 
     tmp = env_ls;
     flag = 0;
-    see_str = search_env_util(str);//нужно free;
+    str1 = search_env_util(str); //нужно free;
     while (tmp->next)
     {
-        see_link_str = search_env_util(tmp->str);
-        if (see_link_str && see_str && !ft_strcmp(see_str, see_link_str))
+        str2 = search_env_util(tmp->str);
+        if (str2 && str1 && !ft_strcmp(str1, str2))
         {
             flag = 1;
             ex_env_addendum(tmp, str);
         }
-        free(see_link_str);
+        free(str2);
         tmp = tmp->next;
     }
-    see_link_str = search_env_util(tmp->str);
-    if (see_link_str && see_str && !ft_strcmp(see_str, see_link_str)) {
+    str2 = search_env_util(tmp->str);
+    if (str2 && str1 && !ft_strcmp(str1, str2)) {
         flag = 1;
         ex_env_addendum(tmp, str);
     }
     if (flag != 1)
         export_list_env(&env_ls, str);
-    free(see_link_str);
-    free(see_str);
+    free(str2);
+    free(str1);
 }
 
 void    ft_export(t_info *inf)

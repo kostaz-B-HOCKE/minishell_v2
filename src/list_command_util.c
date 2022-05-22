@@ -29,11 +29,12 @@ void    free_link(t_link **link)
 {
     t_link  *tmp;
 
-    while (*link)
-    {
-        tmp = *link;
-        *link = (*link)->next;
-        free(tmp);
+    if (*link) {
+        while (*link) {
+            tmp = *link;
+            *link = (*link)->next;
+            free(tmp);
+        }
     }
 }
 
@@ -41,11 +42,15 @@ void    free_env_ls(t_env **link)
 {
     t_env *tmp;
 
-    while (*link)
-    {
-        tmp = *link;
-        *link = (*link)->next;
-        free(tmp);
+    if (*link) {
+        while (*link) {
+            tmp = *link;
+            *link = (*link)->next;
+            free(tmp);
+        }
+//        tmp = *link;
+//        *link = (*link)->next;
+//        free(tmp);
     }
 }
 

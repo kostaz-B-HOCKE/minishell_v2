@@ -38,10 +38,12 @@ void    start_shell(t_info *inf)
             shell_level(inf);
         if (!str)
             break ;
+//        if (str[0] == '1') //для теста
+//            break;
         if (ft_strlen(str) != 0)
             add_history(str);
         parsing_s(inf, str);
-//        free_env_ls(&inf->env_lst);
+        free_link(&inf->link);
     }
 }
 
@@ -95,15 +97,15 @@ int main(int ac, char **argv, char **env)
 {
     t_info	*inf;
 
-
     gl_exit = 0;
     inf = init_info(env);
-
     shell_level(inf);
 //    print_me_env(inf);
 //    child_process(env);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
-    start_shell(inf);
+//    start_shell(inf);
+    free_finish_me(inf);
+    free(inf);
+    exit(0);
 }
-

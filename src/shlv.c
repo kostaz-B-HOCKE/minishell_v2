@@ -14,23 +14,23 @@ static int	check_digit(char *str)
     return (1);
 }
 
-char    *ex_shlvl_add(t_env *env_ls, char *str_add)
+char    *ex_shlvl_add(t_env **env_ls, char *str_add)
 {
     int i;
     char *str;
-    char *str1;
-    char    *input;
+    t_env   *tmp;
+//    char    *ttt;
 
+    char    *input;
     i = -1;
-    input = env_ls->str;
+    input = (*env_ls)->str;
     while (input[++i] && input[i] != '=')
         ;
     str = ft_substr(input, 0, i + 1);
-//    free(env_ls->str);
+//    tmp = *env_ls;
     input = ft_strjoin(str, str_add);
-//    env_ls->str = input;
-//    free(input);
     free(str);
+    free(str_add);
     return (input);
 }
 
@@ -47,30 +47,31 @@ char    *search_equals(char *input)
     return (str);
 }
 
-static void shell_level_pars(t_env  *tmp, char *str)
+static void shell_level_pars(t_env  **tmp, char *str)
 {
     int     number;
+    t_env   *tmp_free;
     int		lvl;
 
-//    printf("str=:%s\n", str);
+    tmp_free = *tmp;
     if (check_digit(str))
     {
         number = ft_atoi(str);
-//        printf("number:%d\n", number);
         if (number < 0)
-            tmp->str = ex_shlvl_add(tmp, "1");
+            (*tmp)->str = ex_shlvl_add(tmp, "1");
         else if (number == 999) {
-            tmp->str = ex_shlvl_add(tmp, "");
+            (*tmp)->str = ex_shlvl_add(tmp, "");
         }
         else if (number > 999)
-            tmp->str = ex_shlvl_add(tmp, "1");
+            (*tmp)->str = ex_shlvl_add(tmp, "1");
         else
-            tmp->str = ex_shlvl_add(tmp, ft_itoa(number + 1));
+            (*tmp)->str = ex_shlvl_add(tmp, ft_itoa(number + 1));
 //      print_error("", "shell level (1000) too high, resetting to 1");
     }
     else {
-        tmp->str = ex_shlvl_add(tmp, "1");
+        (*tmp)->str = ex_shlvl_add(tmp, "1");
     }
+    free(tmp_free->str);
 }
 
 void	shell_level(t_info *inf)
@@ -81,12 +82,13 @@ void	shell_level(t_info *inf)
 
     flag = 0;
     tmp = inf->env_lst;
+
     while (tmp)
     {
         if (!ft_strncmp(tmp->str, "SHLVL=", 6))
         {
             str = ft_substr(tmp->str, 6, ft_strlen(tmp->str) - 6);
-            shell_level_pars(tmp, str);
+            shell_level_pars(&tmp, str);
             free(str);
             flag = 1;
         }

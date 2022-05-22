@@ -48,7 +48,7 @@ typedef struct	s_info
 {
     int     is_dollar;
 //	char	*shlvl;
-//    t_pipels *pipels;
+//  t_pipels *pipels;
 
     t_link  *link;
 	t_env	*env_lst;
@@ -65,7 +65,6 @@ void    print_list_pipels(t_info *inf);
 //init.c
 t_info	*init_info(char **env);
 t_env	*lst_new_env(char *str, int i);
-
 
 //shlv.c
 void	shell_level(t_info *inf);
@@ -104,11 +103,13 @@ int	ft_pipex(t_info *inf);
 //check_cmd.c
 void    cheak_cmd(t_info *inf);
 
-//1_utilus.c
+//1_utilus.c and utilus2.c
 int	ftt_strcmp(const char *s1, const char *s2);
 void	free_arr(char **arr);
 void    printf_dstr(char **super_str);
 int	ft_strcmp(const char *s1, const char *s2);//utilus.c
+void	spl_free(char **str);
+void    free_finish_me(t_info *inf);
 
 //ftt_echo.c
 void    ftt_echo(t_info *inf);

@@ -1,5 +1,35 @@
 #include "../../minishell.h"
 
+//функция из пайпа определяет относительный путь
+char	*chek_cmd_file(char **env, char	*cmd)
+{
+    int		i;
+    char	*str;
+    char	**str_split;
+    char	**chek_split;
+    char	*str_chek;
+
+    i = 0;
+    while (ft_strnstr(env[i], "PATH", 4) == 0)
+        i++;
+    str_split = ft_split(env[i] + 5, ':');
+    chek_split = ft_split(cmd, ' ');
+    i = 0;
+    while (str_split[i])
+    {
+        str = ft_strjoin(str_split[i], "/");
+        str_chek = ft_strjoin(str, chek_split[0]);
+        free(str);
+        if (access(str_chek, F_OK) == 0)
+            return (str_chek);
+        i++;
+        free(str_chek);
+    }
+    spl_free(str_split);
+    spl_free(chek_split);
+    return (0);
+}
+
 void    cheak_cmd(t_info *inf)
 {
     if (ftt_strcmp(inf->link->str, "env") == 0)
@@ -10,12 +40,17 @@ void    cheak_cmd(t_info *inf)
         ftt_echo(inf);
     else if (!ftt_strcmp(inf->link->str, "exit"))
         ftt_exit(porting_link_str(inf));
+//    else if (!ftt_strcmp(inf->link->str, "cd"))
+//        ft_cd(inf);
     else if (ftt_strcmp(inf->link->str, "export") == 0)
         ft_export(inf);
     else if (ftt_strcmp(inf->link->str, "unset") == 0)
         ft_unset(inf);
-//    sle
-//        ftt_pwd(inf);
-
-
+    else
+    {
+        printf("остальные команды\n");
+//        printf("chek_cmd_file:%s\n", chek_cmd_file(porting_link_str(inf), inf->link->str));
+//        execve(command, )
+//        printf()
+    }
 }

@@ -44,8 +44,10 @@ static void	ft_exit_util(char **code)
 
 void	ftt_exit(char **code)
 {
-    if (!code || !*code)
+    if (!code || !*code) {
+        free_arr(code);
         exit(0);
+    }
 //    if (inf->is_pipe)
 //        return ;
     if (len_argvs(code) == 1)
