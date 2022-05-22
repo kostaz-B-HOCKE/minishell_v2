@@ -20,7 +20,7 @@ t_env	*export_list_env(t_env **env_ls, char *str)
             i++;
             new = new->next;
         }
-        new->next = lst_new_env(str);
+        new->next = lst_new_env(str, (1 + ft_envsize(*env_ls)));
         return (start);
     }
     return (NULL);
@@ -33,6 +33,8 @@ char    *search_env_util(char *input)
     int i;
 
     i = -1;
+//    if (!ft_strchr(input, '='))
+//        return (NULL);
     while (input[++i] && input[i] != '=')
         ;
     str = malloc(sizeof(char )* i + 1);
@@ -80,7 +82,7 @@ void    search_env(t_env *env_ls, char *str)
     while (tmp->next)
     {
         see_link_str = search_env_util(tmp->str);
-        if (!ft_strcmp(see_str, see_link_str))
+        if (see_link_str && see_str && !ft_strcmp(see_str, see_link_str))
         {
             flag = 1;
             ex_env_addendum(tmp, str);
@@ -89,7 +91,7 @@ void    search_env(t_env *env_ls, char *str)
         tmp = tmp->next;
     }
     see_link_str = search_env_util(tmp->str);
-    if (!ft_strcmp(see_str, see_link_str)) {
+    if (see_link_str && see_str && !ft_strcmp(see_str, see_link_str)) {
         flag = 1;
         ex_env_addendum(tmp, str);
     }

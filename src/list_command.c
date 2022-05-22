@@ -21,3 +21,4 @@ int	ft_envsize(t_env *lst)
     }
     return (amount);
 }
+

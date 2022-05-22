@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-t_env	*lst_new_env(char *str)
+t_env	*lst_new_env(char *str, int i)
 {
 	t_env	*me_env;
 
@@ -9,7 +9,7 @@ t_env	*lst_new_env(char *str)
 		return (NULL);
 	me_env->str = str;
 	me_env->next = NULL;
-	me_env->number_list = 0;
+	me_env->number_list = i;
 	return (me_env);
 }
 
@@ -19,12 +19,12 @@ t_env	*start_list_env(t_info *inf, char **env)
 	t_env	*new;
 	int		i;
 
-	i = 1;
-	start = lst_new_env(env[0]);
+	i = 0;
+	start = lst_new_env(env[0], 0);
 	new = start;
-	while (env[i])
+	while (env[++i])
 	{
-		new->next = lst_new_env(env[i++]);
+		new->next = lst_new_env(env[i], i);
 		new = new->next;
 	}
 	return (start);
@@ -67,6 +67,7 @@ void    print_me_env(t_info *inf)
 		while (tmp->next)
 		{
 			printf("%s\n",  tmp->str);
+//            printf("count_list:%d\n", tmp->number_list);
 			tmp = tmp->next;
 		}
 		printf("%s\n", tmp->str);

@@ -64,7 +64,7 @@ void    print_list_pipels(t_info *inf);
 
 //init.c
 t_info	*init_info(char **env);
-t_env	*lst_new_env(char *str);
+t_env	*lst_new_env(char *str, int i);
 
 
 //shlv.c
@@ -83,6 +83,7 @@ void    link_add_list(t_link **old, t_link *new);
 void    free_link(t_link **link);
 int     link_size(t_link *link);
 void    free_env_ls(t_env **link);
+int     ft_envsize(t_env *lst);
 
 //ft_qap.c
 char	*ft_gap(char *str, int *i, char c);
