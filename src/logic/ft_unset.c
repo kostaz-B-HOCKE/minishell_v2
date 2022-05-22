@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-void    unset_mid_list(t_info *inf, int i)
+void    unset_delet_mid(t_info *inf, int i)
 {
     t_env   *tmp;
     t_env   *tmp_s;
@@ -37,7 +37,7 @@ void    unset_delet(t_info *inf, int i)
         inf->env_lst = tmp_start;
     }
     else if (i < j - 1)
-        unset_mid_list(inf, i);
+        unset_delet_mid(inf, i);
     else
     {
         tmp = inf->env_lst;
@@ -51,6 +51,20 @@ void    unset_delet(t_info *inf, int i)
     }
 }
 
+int unset_str_util(t_info *inf, char *see_str, int i, char *env_str)
+{
+    int flag;
+
+    flag = 0;
+    if (see_str && env_str && !ft_strcmp(see_str, env_str)) {
+        unset_delet(inf, i);
+        flag = 1;
+    }
+    if (env_str)
+        free(env_str);
+    return (flag);
+}
+
 void    unset_str(t_info *inf, char *str_link)
 {
     t_env   *tmp;
@@ -62,28 +76,21 @@ void    unset_str(t_info *inf, char *str_link)
     tmp = inf->env_lst;
     flag = 0;
     if (ft_strchr(str_link, '='))
+//        print_error("unset: ", "`%s': not a valid identifier");
         printf("unset: `%s': not a valid identifier\n", str_link);
     else
     {
-        see_str = search_env_util(str_link);//нужно free;
+        see_str = search_env_util(str_link); //нужно free;
         i = 0;
         while (flag == 0 && tmp->next) {
             env_str = search_env_util(tmp->str);
-            if (see_str && env_str && !ft_strcmp(see_str, env_str)) {
-                unset_delet(inf, i);
-                flag = 1;
-            }
-            if (env_str)
-                free(env_str);
+            flag = unset_str_util(inf, see_str, i, env_str);
             tmp = tmp->next;
             i++;
         }
         if (flag == 0) {
             env_str = search_env_util(tmp->str);
-            if (see_str && env_str && !ft_strcmp(see_str, env_str))
-                unset_delet(inf, i);
-            if (env_str)
-                free(env_str);
+            flag = unset_str_util(inf, see_str, i, env_str);
         }
         free(see_str);
     }
@@ -102,7 +109,6 @@ void    ft_unset(t_info *inf)
         }
         unset_str(inf, tmp->str);
     }
-
 //    t_env   *env = inf->env_lst;
 //    while (env->next) {
 //        printf("№%d\nstr:%s\n", env->number_list, env->str);
