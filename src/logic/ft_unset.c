@@ -107,7 +107,7 @@ void    ft_unset(t_info *inf)
             unset_str(inf, tmp->str);
             tmp = tmp->next;
         }
-        unset_str(inf, tmp->str);
+//        unset_str(inf, tmp->str);
     }
 //    t_env   *env = inf->env_lst;
 //    while (env->next) {

@@ -43,6 +43,7 @@ void    start_shell(t_info *inf)
         if (ft_strlen(str) != 0)
             add_history(str);
         parsing_s(inf, str);
+
         free_link(&inf->link);
     }
 }
@@ -104,8 +105,8 @@ int main(int ac, char **argv, char **env)
 //    child_process(env);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
-//    start_shell(inf);
+    start_shell(inf);
     free_finish_me(inf);
-    free(inf);
+//    free(inf);
     exit(0);
 }

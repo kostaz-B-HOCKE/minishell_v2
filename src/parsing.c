@@ -74,16 +74,17 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i)
 {
     char **env;
 
-    env = porting_env(inf);
     while (str[++(*i)]) {
 //        printf("do %s\n", str);
         if (str[*i] == '\'')
             str = ft_gap(str, i, '\'');
         else if (str[*i] && str[*i] == '\"')
             str = ft_gap2(str, i, '\"', inf);
-        else if (str[*i] == '$' && (ft_isalnum(str[*i + 1]) || str[*i + 1] == '?'))
+        else if (str[*i] == '$' && (ft_isalnum(str[*i + 1]) || str[*i + 1] == '?')) {
+            env = porting_env(inf);
             str = ft_dollar_pv(str, i, env);
-
+            free_arr(env);
+        }
 
 //        else if (str[*i] == '|') {
 //            printf("%sВижу пайп%s\n",    RED, RESET);
@@ -91,14 +92,16 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i)
 //		else if (str[*i] == '>' || str[*i] == '<')
 //			str = ft_chek_redirect(str, i, inf);
 
-
         else if (str[*i] && str[*i] == ' ')
             str = parse_spaces(str, i, inf);
         if (!str)
             return (NULL);
     }
-    if (ft_strlen(str) != 0)
+    if (ft_strlen(str) != 0) {
+
         link_to_str(str, inf);
+    }
+//    free_arr(env);
 //    print_list_pipels(inf);
 //    put_link_to_pipe(inf);
 //    print_list_pipels(inf);

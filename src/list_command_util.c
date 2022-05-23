@@ -3,12 +3,12 @@
 t_link *list_new_mini(char *str)
 {
     t_link  *new;
-
     new = malloc(sizeof(t_link));
     if (!new)
         return (NULL);
     new->str = str;
     new->next = NULL;
+//    free(str);
     return (new);
 }
 

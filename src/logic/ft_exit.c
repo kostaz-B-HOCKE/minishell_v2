@@ -42,10 +42,9 @@ static void	ft_exit_util(char **code)
     }
 }
 
-void	ftt_exit(char **code)
+void	ftt_exit(t_info *inf, char **code)
 {
     if (!code || !*code) {
-        free_arr(code);
         exit(0);
     }
 //    if (inf->is_pipe)

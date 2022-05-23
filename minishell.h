@@ -116,7 +116,7 @@ void    ftt_echo(t_info *inf);
 char    **porting_link_str(t_info *info);
 
 //ft_exit.c
-void	ftt_exit(char **code);
+void	ftt_exit(t_info *inf, char **code);
 
 //ft_pwd.c
 void	ftt_pwd(t_info *inf);

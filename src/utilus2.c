@@ -16,4 +16,5 @@ void    free_finish_me(t_info *inf)
         free_link(&inf->link);
     if (inf->env_lst)
         free_env_ls(&inf->env_lst);
+    free(inf);
 }
