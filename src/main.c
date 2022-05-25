@@ -53,8 +53,7 @@ int main(int ac, char **argv, char **env)
 
     gl_exit = 0;
     inf = init_info(env);
-//    print_me_env(inf);
-//    shell_level(inf);
+    shell_level(inf);
 //    print_me_env(inf);
 //    child_process(env);
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
@@ -64,3 +63,4 @@ int main(int ac, char **argv, char **env)
 //    free(inf);
     exit(0);
 }
+

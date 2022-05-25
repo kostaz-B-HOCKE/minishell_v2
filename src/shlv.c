@@ -14,64 +14,50 @@ static int	check_digit(char *str)
     return (1);
 }
 
-char    *ex_shlvl_add(t_env **env_ls, char *str_add)
-{
-    int i;
-    char *str;
-    t_env   *tmp;
-//    char    *ttt;
-
-    char    *input;
-    i = -1;
-    input = (*env_ls)->str;
-    while (input[++i] && input[i] != '=')
-        ;
-    str = ft_substr(input, 0, i + 1);
-//    tmp = *env_ls;
-    input = ft_strjoin(str, str_add);
-    free(str);
-    free(str_add);
-    return (input);
-}
-
-char    *search_equals(char *input)
+char    *shlvl_util(int number)
 {
     char    *str;
-    int i;
+    char    *str3;
+    int     i;
 
+    str = ft_itoa(number);
     i = 0;
-    while (input[++i] && input[i] != '=')
-        ;
-    str = ft_substr(input, 0, i + 1);
-    printf("str=:%s\n", str);
-    return (str);
+    while (str[i])
+        i++;
+    str3 = ft_strjoin("SHLVL=", str);
+    if (str)
+        free(str);
+    return (str3);
 }
 
-static void shell_level_pars(t_env  **tmp, char *str)
+static void shell_level_pars(t_info *inf, char *str)
 {
     int     number;
-    t_env   *tmp_free;
-    int		lvl;
+    char    *str_add;
 
-    tmp_free = *tmp;
     if (check_digit(str))
     {
         number = ft_atoi(str);
+        number++;
         if (number < 0)
-            (*tmp)->str = ex_shlvl_add(tmp, "1");
+            search_env(inf, "SHLVL=1");
         else if (number == 999) {
-            (*tmp)->str = ex_shlvl_add(tmp, "");
+            search_env(inf, "SHLVL=");
         }
         else if (number > 999)
-            (*tmp)->str = ex_shlvl_add(tmp, "1");
+            search_env(inf, "SHLVL=1");
         else
-            (*tmp)->str = ex_shlvl_add(tmp, ft_itoa(number + 1));
+        {
+            str_add = shlvl_util(number);
+            search_env(inf, str_add);
+            free(str_add);
+        }
+//            (*tmp)->str = ex_shlvl_add(tmp, ft_itoa(number + 1));
 //      print_error("", "shell level (1000) too high, resetting to 1");
     }
     else {
-        (*tmp)->str = ex_shlvl_add(tmp, "1");
+        search_env(inf, "SHLVL=1");
     }
-    free(tmp_free->str);
 }
 
 void	shell_level(t_info *inf)
@@ -88,13 +74,13 @@ void	shell_level(t_info *inf)
         if (!ft_strncmp(tmp->str, "SHLVL=", 6))
         {
             str = ft_substr(tmp->str, 6, ft_strlen(tmp->str) - 6);
-            shell_level_pars(&tmp, str);
+            shell_level_pars(inf, str);
             free(str);
             flag = 1;
         }
         tmp = tmp->next;
     }
     if (flag == 0)
-        search_env(inf->env_lst, "SHLVL=1");
+        search_env(inf, "SHLVL=1");
 }
 

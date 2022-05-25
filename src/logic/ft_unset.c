@@ -17,6 +17,8 @@ void    unset_delet_mid(t_info *inf, int i)
     tmp_next = tmp_s->next->next;
     tmp->next = NULL;
     tmp_s->next = tmp_next;
+    if (tmp->str)
+        free(tmp->str);
     free(tmp);
 //    free(tmp_s);
     inf->env_lst = tmp_start;
@@ -31,26 +33,27 @@ void    unset_delet(t_info *inf, int i)
 
     j = ft_envsize(inf->env_lst);
     if (i == 0) {
-        printf("1\n");
         tmp = inf->env_lst;
         tmp_start = inf->env_lst->next;
         tmp->next = NULL;
+        if (tmp->str)
+            free(tmp->str);
         free(tmp);
         inf->env_lst = tmp_start;
     }
     else if (i < j - 1) {
-        printf("2\n");
         unset_delet_mid(inf, i);
     }
     else
     {
-        printf("3\n");
         tmp = inf->env_lst;
         tmp_start = tmp;
         while (tmp_start->next->next)
             tmp_start = tmp_start->next;
         tmp_next = tmp_start->next;
         tmp_start->next = NULL;
+        if (tmp_next->str)
+            free(tmp_next->str);
         free(tmp_next);
         inf->env_lst = tmp;
     }
