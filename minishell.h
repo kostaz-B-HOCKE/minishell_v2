@@ -15,8 +15,6 @@
 #include "libft/libft.h"
 # define SHELL_NAME "minishell% "
 # define ERROR_NAME "minishell"
-# define ONE_TOKEN "Error! Unclosed quote"
-# define TWO_TOKEN "Error! Unclosed dquote"
 # define SYNTAX_TOKEN "syntax error"
 # define IN_TOKEN "syntax error near unexpected token `<'"
 # define OUT_TOKEN "syntax error near unexpected token `>'"
@@ -41,14 +39,12 @@ typedef struct	s_env
 {
     char			*str;
     int				number_list;
-
     struct s_env	*next;
 }				t_env;
 
 typedef struct	s_info
 {
     int     is_dollar;
-
 
 //	char	*shlvl;
 //  t_pipels *pipels;
@@ -101,6 +97,8 @@ char	*ft_dollar_pv(char *str, int *i, char **env);
 //pipe_test.c
 void    pipee_test(void);
 int	ft_pipex(t_info *inf);
+
+
 //logic
 //__++++++++++++++++
 //check_cmd.c
@@ -134,5 +132,8 @@ char    *search_env_util(char *input);
 //ft_unset.c
 void    ft_unset(t_info *inf);
 
+//exe_command.c and exe_command_util.c
+void    exe_command(t_info *inf);
+char	**re_build_command(char **arg, t_info *inf);
 
 #endif

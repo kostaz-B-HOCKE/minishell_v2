@@ -83,4 +83,3 @@ void	shell_level(t_info *inf)
     if (flag == 0)
         search_env(inf, "SHLVL=1");
 }
-

@@ -59,8 +59,9 @@ int main(int ac, char **argv, char **env)
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
 //    pipee_test();
     start_shell(inf);
+    printf("%d\n", inf->is_dollar);
     free_finish_me(inf);
 //    free(inf);
-    exit(0);
+//    exit(0);
 }
 

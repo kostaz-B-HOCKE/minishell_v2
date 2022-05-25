@@ -49,12 +49,11 @@ void    cheak_cmd(t_info *inf)
     }
     else if (ftt_strcmp(inf->link->str, "unset") == 0)
         ft_unset(inf);
-//    else if (ftt_strcmp(inf->link->str, "555") == 0)
-//        printf("555 666\n");
-//        exit(0);
     else
     {
-        printf("остальные команды\n");
+//        printf("остальные команды\n");
+        printf("%s??else??%s\n",    WHITE, RESET);
+        exe_command(inf);
 //        printf("chek_cmd_file:%s\n", chek_cmd_file(porting_link_str(inf), inf->link->str));
 //        execve(command, )
 //        printf()

@@ -5,17 +5,9 @@ SRB_DIR		= src/
 SRB		= $(addprefix $(SRB_DIR), main.c init.c parsing.c ft_qap.c ft_dollar.c list_command.c utilus2.c \
 								list_command_util.c utilus.c	pipex_test.c	logic/check_cmd.c	1_utilus.c		\
 								shlv.c logic/ftt_echo.c	logic/ft_exit.c	logic/ft_unset.c	\
-								logic/ft_pwd.c	logic/ft_export.c\
+								logic/ft_pwd.c	logic/ft_export.c logic/exe_command.c\
+								logic/exe_command_util.c          \
 								)
-
-
-#SRB		= $(addprefix $(SRB_DIR), main.c execve_unil.c pipex.c init.c \
-#					adoption_cmd.c par.c shell_level.c utilus.c ft_dollar.c ft_qap.c \
-#					utilus_free.c check_util.c redirect_1.c reading_get_line.c \
-#					list_command_util.c	list_command.c  parsin.c  pipe_list_utilus.c      \
-#					exe_command.c error_util.c execute_ft_pipe.c ft_pwd.c				\
-#					ftt_echo.c ftt_cd.c)
-
 
 
 #SRB		= $(addprefix $(SRB_DIR), main.c)
