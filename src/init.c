@@ -1,5 +1,27 @@
 #include "../minishell.h"
 
+//char    *circu_env(char *input)
+//{
+//    char    *str;
+//    int i;
+//
+//    i = -1;
+//    while (input[++i] && input[i] != '=')
+//        ;
+//    str = malloc(sizeof (char ) * i + 2);
+//    if (!str)
+//        return (NULL);
+//    i = -1;
+//    while (input[++i] && input[i] != '=')
+//    {
+//        str[i] = input[i];
+//    }
+//    str[i++] = '=';
+//    str[i] = 0;
+//    return (str);
+//}
+
+
 t_env	*lst_new_env(char *str, int i)
 {
 	t_env	*me_env;
@@ -7,10 +29,10 @@ t_env	*lst_new_env(char *str, int i)
 	me_env = malloc(sizeof(t_env));
 	if (!me_env)
 		return (NULL);
-	me_env->str = str;
-	me_env->next = NULL;
-	me_env->number_list = i;
-	return (me_env);
+	me_env->str = ft_strdup(str);
+    me_env->number_list = i;
+    me_env->next = NULL;
+    return (me_env);
 }
 
 t_env	*start_list_env(t_info *inf, char **env)
@@ -47,12 +69,10 @@ t_info	*init_info(char **env)
     }
     inf->env_lst = NULL;
     inf->is_dollar = 0;
-	env_move(inf, env);
-
     inf->link = NULL;
-//    inf->shlvl = NULL;
-//    inf->pipels = NULL;
-	return (inf);
+
+    env_move(inf, env);
+    return (inf);
 }
 
 //для проверок________________________________________________________________________________________________________
@@ -67,6 +87,7 @@ void    print_me_env(t_info *inf)
 		while (tmp->next)
 		{
 			printf("%s\n",  tmp->str);
+//            printf("%s\n",  tmp->start);
 //            printf("count_list:%d\n", tmp->number_list);
 			tmp = tmp->next;
 		}

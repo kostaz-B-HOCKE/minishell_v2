@@ -37,8 +37,9 @@ void    cheak_cmd(t_info *inf)
         print_me_env(inf);
     else if (ftt_strcmp(inf->link->str, "pwd") == 0)
         ftt_pwd(inf);
-    else if (ftt_strcmp(inf->link->str, "echo") == 0)
+    else if (ftt_strcmp(inf->link->str, "echo") == 0) {
         ftt_echo(inf);
+    }
     else if (!ftt_strcmp(inf->link->str, "exit"))
         ftt_exit(inf, porting_link_str(inf));
 //    else if (!ftt_strcmp(inf->link->str, "cd"))

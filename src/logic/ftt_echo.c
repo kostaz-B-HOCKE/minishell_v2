@@ -21,7 +21,7 @@ char    **porting_link_str(t_info *info)
     tmp = info->link;
     while (tmp->next)
     {
-        super_str[i++] = tmp->str;
+        super_str[i++] = ft_strdup(tmp->str);
         tmp = tmp->next;
     }
     super_str[i++] = ft_strdup(tmp->str);

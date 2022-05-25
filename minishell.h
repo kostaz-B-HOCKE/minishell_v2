@@ -41,12 +41,15 @@ typedef struct	s_env
 {
     char			*str;
     int				number_list;
+
     struct s_env	*next;
 }				t_env;
 
 typedef struct	s_info
 {
     int     is_dollar;
+
+
 //	char	*shlvl;
 //  t_pipels *pipels;
 

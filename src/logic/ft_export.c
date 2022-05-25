@@ -1,6 +1,6 @@
 #include "../../minishell.h"
 
-t_env	*export_list_env(t_env **env_ls, char *str)
+t_env	*export_list_env(t_env *env_ls, char *str)
 {
     t_env	*new;
     t_env   *start;
@@ -12,15 +12,22 @@ t_env	*export_list_env(t_env **env_ls, char *str)
     while (str[++i])
         if (str[i] == '=')
             flag = 1;
-    if (flag == 1) {
-        start = *env_ls;
+//    printf("flag%d\n", flag);
+    if (flag == 1)
+    {
+//        printf("flag =1\n");
+        start = env_ls;
         i = 0;
         new = start;
         while (new->next) {
             i++;
+//            printf("%s\n", new->str);
             new = new->next;
         }
-        new->next = lst_new_env(str, (1 + ft_envsize(*env_ls)));
+//        printf("12312%s\n", new->str);
+//        new = new->next;
+//        printf("str:%s\n", str);
+        new->next = lst_new_env(ft_strdup(str), (1 + ft_envsize(env_ls)));
         return (start);
     }
     return (NULL);
@@ -80,10 +87,12 @@ void    search_env(t_env *env_ls, char *str)
 
     tmp = env_ls;
     flag = 0;
-    str1 = search_env_util(str); //нужно free;
+    str1 = search_env_util(str);
+//    printf("стока1:%s\n", str1);
     while (tmp->next)
     {
         str2 = search_env_util(tmp->str);
+//        printf("str2:%s\n", str2);
         if (str2 && str1 && !ft_strcmp(str1, str2))
         {
             flag = 1;
@@ -97,8 +106,10 @@ void    search_env(t_env *env_ls, char *str)
         flag = 1;
         ex_env_addendum(tmp, str);
     }
-    if (flag != 1)
-        export_list_env(&env_ls, str);
+    if (flag != 1) {
+//        printf("flag = 1\n");
+        export_list_env(env_ls, str);
+    }
     free(str2);
     free(str1);
 }
@@ -110,15 +121,19 @@ void    ft_export(t_info *inf)
     if (inf->link->next) {
         tmp = inf->link->next;
         while (tmp->next) {
+            printf("go\n");
             if (ft_isalpha(tmp->str[0]))
                 search_env(inf->env_lst, tmp->str);
             else
                 printf("export: `%s': not a valid identifier\n", tmp->str);
             tmp = tmp->next;
         }
-        if (ft_isalpha(tmp->str[0]))
+        if (ft_isalpha(tmp->str[0])) {
+            printf("go\n");
             search_env(inf->env_lst, tmp->str);
+        }
         else
             printf("export: `%s': not a valid identifier\n", tmp->str);
     }
+//    print_me_env(inf);
 }

@@ -44,7 +44,7 @@ char    **porting_env(t_info *info)
     tmp = info->env_lst;
     while (tmp->next)
     {
-        super_str[i++] = tmp->str;
+        super_str[i++] = ft_strdup(tmp->str);
         tmp = tmp->next;
     }
     super_str[i++] = ft_strdup(tmp->str);
@@ -124,6 +124,4 @@ void    parsing_s(t_info *inf, char *str)
     str = delete_spese(str);
     str = chek_symbol_str(inf, str,	&i);
     cheak_cmd(inf);
-
-    free_link(&inf->link);
 }

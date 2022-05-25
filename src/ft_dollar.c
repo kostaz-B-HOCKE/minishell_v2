@@ -91,5 +91,6 @@ char	*ft_dollar_pv(char *str, int *i, char **env)
     str = ft_strjoin_free(start, mid);
     *i = ft_strlen(str);
     start = ft_strjoin_free(str, end);
+    free_arr(env);
     return (start);
 }
