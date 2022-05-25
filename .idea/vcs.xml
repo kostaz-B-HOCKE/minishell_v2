@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/15" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/M_old" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/al" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/minishell copy.h" vcs="Git" />

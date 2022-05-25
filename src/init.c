@@ -70,7 +70,7 @@ t_info	*init_info(char **env)
     inf->env_lst = NULL;
     inf->is_dollar = 0;
     inf->link = NULL;
-
+    inf->pipe_lst = NULL;
     env_move(inf, env);
     return (inf);
 }
@@ -94,6 +94,50 @@ void    print_me_env(t_info *inf)
 		printf("%s\n", tmp->str);
 	}
 }
+
+void    print_link_p(t_link *link)
+{
+    t_link *tmp;
+
+    tmp = link;
+    if (tmp != NULL)
+    {
+        while (tmp->next)
+        {
+            printf("  link:%s\n",  tmp->str);
+            tmp = tmp->next;
+        }
+        printf("  link:%s\n", tmp->str);
+    }
+    else
+        printf("no list link\n");
+}
+
+void    print_me_pipels(t_info *inf)
+{
+    t_pipe *tmp;
+    int i;
+
+    i = 0;
+    tmp = inf->pipe_lst;
+    if (tmp != NULL)
+    {
+        while (tmp->next)
+        {
+            printf("%d", i);
+            print_link_p(tmp->link);
+            printf("\n");
+            tmp = tmp->next;
+            i++;
+        }
+        printf("%d", i);
+        print_link_p(tmp->link);
+    }
+    else
+        printf("no list pipe\n");
+}
+
+
 
 void    print_me_link(t_info *inf)
 {

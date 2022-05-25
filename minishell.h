@@ -42,13 +42,19 @@ typedef struct	s_env
     struct s_env	*next;
 }				t_env;
 
+typedef struct	ss_pipe
+{
+    t_link          *link;
+    struct ss_pipe	*next;
+}				t_pipe;
+
 typedef struct	s_info
 {
     int     is_dollar;
+    int     flag_pipe;
 
-//	char	*shlvl;
-//  t_pipels *pipels;
 
+    t_pipe  *pipe_lst;
     t_link  *link;
 	t_env	*env_lst;
 }		t_info;
@@ -59,7 +65,7 @@ extern void rl_replace_line(const char *, int);
 //проверки
 void    print_me_env(t_info *inf);
 void    print_me_link(t_info *inf);
-void    print_list_pipels(t_info *inf);
+void    print_me_pipels(t_info *inf);
 
 //init.c
 t_info	*init_info(char **env);
@@ -74,7 +80,10 @@ char    **porting_env(t_info *info);
 char	*parse_spaces(char *input, int *index, t_info *inf);
 char    *chek_symbol_str(t_info *inf, char *str, int *i);
 
-//list_command_util.c
+//pipe_cutting.c
+char    *ft_pipex_cutting(char *input, int *i, t_info *inf);
+
+//list_command.c and list_command_util.c and list_pipe.c
 void    link_to_str(char *str, t_info *inf);
 t_link  *list_new_mini(char *str);
 void    link_add_list(t_link **old, t_link *new);
@@ -82,6 +91,8 @@ void    free_link(t_link **link);
 int     link_size(t_link *link);
 void    free_env_ls(t_env **link);
 int     ft_envsize(t_env *lst);
+void    pipe_fill_in(t_info *inf);
+void    free_pipe_ls(t_pipe **pipe_ls);
 
 //ft_qap.c
 char	*ft_gap(char *str, int *i, char c);
