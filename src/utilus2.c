@@ -18,3 +18,11 @@ void    free_finish_me(t_info *inf)
         free_env_ls(&inf->env_lst);
     free(inf);
 }
+
+void    free_two_str(char *s1, char *s2)
+{
+    if (s1)
+        free(s1);
+    if (s2)
+        free(s2);
+}

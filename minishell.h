@@ -113,6 +113,7 @@ void    printf_dstr(char **super_str);
 int	ft_strcmp(const char *s1, const char *s2);//utilus.c
 void	spl_free(char **str);
 void    free_finish_me(t_info *inf);
+void    free_two_str(char *s1, char *s2);
 
 //ftt_echo.c
 void    ftt_echo(t_info *inf);
@@ -127,7 +128,7 @@ void	ftt_pwd(t_info *inf);
 //ft_export.c
 void    ft_export(t_info *inf);
 void    ex_env_addendum(t_env *env_ls, char *replec);
-void    search_env(t_env *env_ls, char *str);
+void    search_env(t_info *inf, char *str);
 char    *search_env_util(char *input);
 
 //ft_unset.c

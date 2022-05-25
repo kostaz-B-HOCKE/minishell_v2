@@ -18,6 +18,7 @@ void    unset_delet_mid(t_info *inf, int i)
     tmp->next = NULL;
     tmp_s->next = tmp_next;
     free(tmp);
+//    free(tmp_s);
     inf->env_lst = tmp_start;
 }
 
@@ -30,16 +31,20 @@ void    unset_delet(t_info *inf, int i)
 
     j = ft_envsize(inf->env_lst);
     if (i == 0) {
+        printf("1\n");
         tmp = inf->env_lst;
         tmp_start = inf->env_lst->next;
         tmp->next = NULL;
         free(tmp);
         inf->env_lst = tmp_start;
     }
-    else if (i < j - 1)
+    else if (i < j - 1) {
+        printf("2\n");
         unset_delet_mid(inf, i);
+    }
     else
     {
+        printf("3\n");
         tmp = inf->env_lst;
         tmp_start = tmp;
         while (tmp_start->next->next)
@@ -76,11 +81,10 @@ void    unset_str(t_info *inf, char *str_link)
     tmp = inf->env_lst;
     flag = 0;
     if (ft_strchr(str_link, '='))
-//        print_error("unset: ", "`%s': not a valid identifier");
-        printf("unset: `%s': not a valid identifier\n", str_link);
+        print_error("", "unset: `%s': not a valid identifier");
     else
     {
-        see_str = search_env_util(str_link); //нужно free;
+        see_str = search_env_util(str_link);
         i = 0;
         while (flag == 0 && tmp->next) {
             env_str = search_env_util(tmp->str);
@@ -90,8 +94,10 @@ void    unset_str(t_info *inf, char *str_link)
         }
         if (flag == 0) {
             env_str = search_env_util(tmp->str);
-            flag = unset_str_util(inf, see_str, i, env_str);
+            unset_str_util(inf, see_str, i, env_str);
         }
+//        if (env_str)
+//            free(env_str);
         free(see_str);
     }
 }
@@ -107,7 +113,7 @@ void    ft_unset(t_info *inf)
             unset_str(inf, tmp->str);
             tmp = tmp->next;
         }
-//        unset_str(inf, tmp->str);
+        unset_str(inf, tmp->str);
     }
 //    t_env   *env = inf->env_lst;
 //    while (env->next) {

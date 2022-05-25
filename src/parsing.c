@@ -72,8 +72,6 @@ char	*parse_spaces(char *input, int *index, t_info *inf)
 
 char    *chek_symbol_str(t_info *inf, char *str, int *i)
 {
-    char **env;
-
     while (str[++(*i)]) {
 //        printf("do %s\n", str);
         if (str[*i] == '\'')
@@ -81,11 +79,8 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i)
         else if (str[*i] && str[*i] == '\"')
             str = ft_gap2(str, i, '\"', inf);
         else if (str[*i] == '$' && (ft_isalnum(str[*i + 1]) || str[*i + 1] == '?')) {
-            env = porting_env(inf);
-            str = ft_dollar_pv(str, i, env);
-            free_arr(env);
+            str = ft_dollar_pv(str, i, porting_env(inf));
         }
-
 //        else if (str[*i] == '|') {
 //            printf("%sВижу пайп%s\n",    RED, RESET);
 //            str = ft_pipex_cutting(str, i, inf);

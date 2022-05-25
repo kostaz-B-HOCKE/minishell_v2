@@ -56,12 +56,12 @@ char    *ft_dollar_grep(int *i, int j, char *str, char **env)
             }
         }
     }
-    free(tmp);
-    free(tmp2);
+    if (tmp)
+        free(tmp);
+    if (tmp2)
+        free(tmp2);
     if (flag == 1)
-    {
         tmp = ft_substr(env[k], z + 1, ft_strlen(env[k]) - z);
-    }
     else
         tmp = ft_strdup("\0");
     return (tmp);
@@ -85,8 +85,9 @@ char	*ft_dollar_pv(char *str, int *i, char **env)
     if (str[j + 1] == '?' && *i == j + 1) {
         mid = ft_itoa(gl_exit);
     }
-    else
+    else {
         mid = ft_dollar_grep(i, j, str, env);
+    }
     free(str);
     str = ft_strjoin_free(start, mid);
     *i = ft_strlen(str);

@@ -9,7 +9,7 @@ int prepars(char *str, int *i, char c)
             return (0);
         }
     }
-    printf("%s: %s\n", ERROR_NAME, "Error! Unclosed quote");
+    print_error("", "\"Error! Unclosed quote\"");
     free(str);
     return (1);
 }
@@ -45,7 +45,8 @@ char *prepars_two(char *str, int *i, char c, t_info *inf)
         if (str[(*i)] == c)
             return (str);
     }
-    printf("%s: %s\n", ERROR_NAME, "Error! Unclosed dquote");
+    print_error("", "\"Error! Unclosed dquote\"");
+//    printf("%s: %s\n", ERROR_NAME, "Error! Unclosed dquote");
     free(str);
     return (NULL);
 }
