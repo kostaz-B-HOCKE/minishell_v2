@@ -83,6 +83,9 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i);
 //pipe_cutting.c
 char    *ft_pipex_cutting(char *input, int *i, t_info *inf);
 
+//redirect1.c
+char *ft_redirect1(char *str, int *i, t_info *inf);
+
 //list_command.c and list_command_util.c and list_pipe.c
 void    link_to_str(char *str, t_info *inf);
 t_link  *list_new_mini(char *str);

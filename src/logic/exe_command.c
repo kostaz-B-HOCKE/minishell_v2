@@ -44,7 +44,7 @@ void    exe_command(t_info *inf)
 {
     char    **command;
 
-    if (inf->link->str)
+    if (inf->pipe_lst->link->str)
         command = porting_link_str(inf);
 
     exe_fork(command, inf);

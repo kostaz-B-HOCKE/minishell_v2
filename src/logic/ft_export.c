@@ -115,8 +115,8 @@ void    ft_export(t_info *inf)
 {
     t_link  *tmp;
 
-    if (inf->link->next) {
-        tmp = inf->link->next;
+    if (inf->pipe_lst->link->next) {
+        tmp = inf->pipe_lst->link->next;
         while (tmp->next) {
             if (ft_isalpha(tmp->str[0]))
                 search_env(inf, tmp->str);

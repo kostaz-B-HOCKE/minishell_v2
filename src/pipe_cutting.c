@@ -16,7 +16,6 @@ char    *ft_pipex_cutting(char *input, int *offset, t_info *inf)
     str_do = ft_substr(input, 1, ft_strlen(input) - 1);
 //    printf("c:%c\n", input[*offset]);
 
-
     *offset = 0;
     free(input);
     return (str_do);

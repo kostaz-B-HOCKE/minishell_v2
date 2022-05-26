@@ -8,7 +8,7 @@ char    **porting_link_str(t_info *info)
 
 //    printf("oo:%s\n", info->link->next->str);
     i = 0;
-    tmp = info->link;
+    tmp = info->pipe_lst->link;
     while (tmp->next)
     {
         i++;
@@ -18,7 +18,7 @@ char    **porting_link_str(t_info *info)
     if (!super_str)
         return (NULL);
     i = 0;
-    tmp = info->link;
+    tmp = info->pipe_lst->link;
     while (tmp->next)
     {
         super_str[i++] = ft_strdup(tmp->str);

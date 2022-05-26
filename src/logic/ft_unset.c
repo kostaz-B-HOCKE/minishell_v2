@@ -109,9 +109,9 @@ void    ft_unset(t_info *inf)
 {
     t_link  *tmp;
 
-    if (inf->link->next)
+    if (inf->pipe_lst->link->next)
     {
-        tmp = inf->link->next;
+        tmp = inf->pipe_lst->link->next;
         while (tmp->next) {
             unset_str(inf, tmp->str);
             tmp = tmp->next;

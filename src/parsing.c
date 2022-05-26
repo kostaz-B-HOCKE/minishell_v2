@@ -70,6 +70,16 @@ char	*parse_spaces(char *input, int *index, t_info *inf)
     return (end);
 }
 
+char    *ft_chek_redirect(char *str, int *i, t_info *inf)
+{
+//    if (str[*i] == '>' && str[*i + 1] == '>')
+    if (str[*i] == '>')
+        str = ft_redirect1(str, i, inf);
+//    else if (str[*i] == '<' && str[*i + 1] == '<')
+//    else if (str[*i] == '<')
+    return (str);
+}
+
 char    *chek_symbol_str(t_info *inf, char *str, int *i)
 {
     while (str[++(*i)]) {
@@ -109,5 +119,6 @@ void    parsing_s(t_info *inf, char *str)
     }
     str = delete_spese(str);
     str = chek_symbol_str(inf, str,	&i);
+//    printf("finish chek_symbol\n");
     cheak_cmd(inf);
 }

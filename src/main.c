@@ -43,7 +43,8 @@ void    start_shell(t_info *inf)
         if (ft_strlen(str) != 0)
             add_history(str);
         parsing_s(inf, str);
-        free_link(&inf->link);
+        free_pipe_ls(&inf->pipe_lst);
+//        free_link(&inf->link);
     }
 }
 

@@ -33,21 +33,23 @@ char	*chek_cmd_file(char **env, char	*cmd)
 void    cheak_cmd(t_info *inf)
 {
 //    printf("1:%s\n", inf->link->str);
-    if (ftt_strcmp(inf->link->str, "env") == 0)
+    if (!inf->pipe_lst->link->str)
+        return ;
+    if (ftt_strcmp(inf->pipe_lst->link->str, "env") == 0)
         print_me_env(inf);
-    else if (ftt_strcmp(inf->link->str, "pwd") == 0)
+    else if (ftt_strcmp(inf->pipe_lst->link->str, "pwd") == 0)
         ftt_pwd(inf);
-    else if (ftt_strcmp(inf->link->str, "echo") == 0) {
+    else if (ftt_strcmp(inf->pipe_lst->link->str, "echo") == 0) {
         ftt_echo(inf);
     }
-    else if (!ftt_strcmp(inf->link->str, "exit"))
+    else if (!ftt_strcmp(inf->pipe_lst->link->str, "exit"))
         ftt_exit(inf, porting_link_str(inf));
 //    else if (!ftt_strcmp(inf->link->str, "cd"))
 //        ft_cd(inf);
-    else if (ftt_strcmp(inf->link->str, "export") == 0) {
+    else if (ftt_strcmp(inf->pipe_lst->link->str, "export") == 0) {
         ft_export(inf);
     }
-    else if (ftt_strcmp(inf->link->str, "unset") == 0)
+    else if (ftt_strcmp(inf->pipe_lst->link->str, "unset") == 0)
         ft_unset(inf);
     else
     {
