@@ -30,6 +30,12 @@ char	*chek_cmd_file(char **env, char	*cmd)
     return (0);
 }
 
+void    ft_minishell(t_info *inf)
+{
+
+    printf("!\n");
+}
+
 void    cheak_cmd(t_info *inf)
 {
 //    printf("1:%s\n", inf->link->str);
@@ -51,13 +57,16 @@ void    cheak_cmd(t_info *inf)
     }
     else if (ftt_strcmp(inf->pipe_lst->link->str, "unset") == 0)
         ft_unset(inf);
+    else if (ftt_strcmp(inf->pipe_lst->link->str, "./minishell") == 0)
+        ft_minishell(inf);
     else
     {
 //        printf("остальные команды\n");
-        printf("%s??else??%s\n",    WHITE, RESET);
+        printf("%s??also??%s\n",    WHITE, RESET);
         exe_command(inf);
 //        printf("chek_cmd_file:%s\n", chek_cmd_file(porting_link_str(inf), inf->link->str));
 //        execve(command, )
 //        printf()
     }
 }
+

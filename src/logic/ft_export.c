@@ -110,7 +110,6 @@ void    search_env(t_info *inf, char *str)
     free_two_str(str2, str1);
 }
 
-//void    ft_export_util(t_info)
 void    ft_export(t_info *inf)
 {
     t_link  *tmp;
@@ -127,10 +126,8 @@ void    ft_export(t_info *inf)
         if (ft_isalpha(tmp->str[0])) {
             search_env(inf, tmp->str);
         }
-
-
-//        else
-//            print_error("", "export: `%s': not a valid identifier");
+        else
+            print_error("", "export: `%s': not a valid identifier");
     }
 //    print_me_env(inf);
 }

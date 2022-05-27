@@ -35,6 +35,33 @@ t_env	*lst_new_env(char *str, int i)
     return (me_env);
 }
 
+void    minishell_patch(t_info *inf)
+{
+    t_env   *tmp;
+    char    *str;
+    char    *str1;
+    char    *str3;
+
+    tmp = inf->env_lst;
+    while (tmp != NULL)
+    {
+        if (ft_strncmp(tmp->str, "PWD=", 4) == 0)
+        {
+            str = ft_substr(tmp->str, 4, ft_strlen(tmp->str) - 4);
+            break ;
+        }
+        tmp = tmp->next;
+    }
+    if (str) {
+        str1 = ft_strjoin(str, "/./minishell");
+        free(str);
+        str3 = ft_strjoin("_=", str1);
+        free(str1);
+        search_env(inf, str3);
+        free(str3);
+    }
+}
+
 t_env	*start_list_env(t_info *inf, char **env)
 {
 	t_env	*start;
@@ -42,14 +69,16 @@ t_env	*start_list_env(t_info *inf, char **env)
 	int		i;
 
 	i = 0;
-	start = lst_new_env(env[0], 0);
-	new = start;
-	while (env[++i])
-	{
-		new->next = lst_new_env(env[i], i);
-		new = new->next;
-	}
-	return (start);
+    if (env) {
+        start = lst_new_env(env[0], 0);
+        new = start;
+        while (env[++i]) {
+            new->next = lst_new_env(env[i], i);
+            new = new->next;
+        }
+        return (start);
+    }
+    return (NULL);
 }
 
 int	env_move(t_info *inf, char **env)
@@ -63,16 +92,20 @@ t_info	*init_info(char **env)
 {
 	t_info	*inf;
 
-	inf = malloc(sizeof(t_info));
-	if (!inf) {
-        return (NULL);
+    if (env) {
+        inf = malloc(sizeof(t_info));
+        if (!inf) {
+            return (NULL);
+        }
+        inf->env_lst = NULL;
+        inf->is_dollar = 0;
+        inf->link = NULL;
+        inf->pipe_lst = NULL;
+        env_move(inf, env);
+        minishell_patch(inf);
+        return (inf);
     }
-    inf->env_lst = NULL;
-    inf->is_dollar = 0;
-    inf->link = NULL;
-    inf->pipe_lst = NULL;
-    env_move(inf, env);
-    return (inf);
+    return (NULL);
 }
 
 //для проверок________________________________________________________________________________________________________
@@ -86,12 +119,13 @@ void    print_me_env(t_info *inf)
 	{
 		while (tmp->next)
 		{
-			printf("%s\n",  tmp->str);
+            ft_putendl_fd(tmp->str, 1);
+//			printf("%s\n",  tmp->str);
 //            printf("%s\n",  tmp->start);
 //            printf("count_list:%d\n", tmp->number_list);
 			tmp = tmp->next;
 		}
-		printf("%s\n", tmp->str);
+        ft_putendl_fd(tmp->str, 1);
 	}
 }
 
@@ -136,8 +170,6 @@ void    print_me_pipels(t_info *inf)
     else
         printf("no list pipe\n");
 }
-
-
 
 void    print_me_link(t_info *inf)
 {

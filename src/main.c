@@ -34,8 +34,6 @@ void    start_shell(t_info *inf)
     {
         sig_handler(); //contrl +D дает сегу
         str = readline("mimishell: ");
-        if (!ft_strcmp(str, "./minishell"))
-            shell_level(inf);
         if (!str)
             break ;
 //        if (str[0] == '1') //для теста
@@ -44,7 +42,6 @@ void    start_shell(t_info *inf)
             add_history(str);
         parsing_s(inf, str);
         free_pipe_ls(&inf->pipe_lst);
-//        free_link(&inf->link);
     }
 }
 
@@ -52,16 +49,16 @@ int main(int ac, char **argv, char **env)
 {
     t_info	*inf;
 
-    gl_exit = 0;
-    inf = init_info(env);
+//    printf("%sGO%s\n", RED, RESET);
+    if (env) {
+        gl_exit = 0;
+        inf = init_info(env);
+    }
     shell_level(inf);
-//    print_me_env(inf);
-//    child_process(env);
+
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");
-//    pipee_test();
     start_shell(inf);
 
     free_finish_me(inf);
-//    exit(0);
 }
 

@@ -51,4 +51,3 @@ void    ftt_echo(t_info *inf)
     printf("\n");
     free_arr(arg);
 }
-

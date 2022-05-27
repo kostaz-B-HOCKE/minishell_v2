@@ -31,11 +31,12 @@ void    exe_fork(char **command, t_info *inf)
     else if (pid == 0)
     {
 
-        ft_child(inf, command);
 
+        ft_child(inf, command);
     }
     else
     {
+
         ft_parent(pid, inf);
     }
 }
@@ -47,6 +48,7 @@ void    exe_command(t_info *inf)
     if (inf->pipe_lst->link->str)
         command = porting_link_str(inf);
 
+//    printf("%s%s%s\n",    RED, command[0], RESET);
     exe_fork(command, inf);
     free_arr(command);
 }
