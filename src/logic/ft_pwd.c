@@ -7,8 +7,7 @@ void	ftt_pwd(t_info *inf)
     char    *test;
     char    *str;
 
-//    fd = init_logic_fd(inf);
-    fd = 1;
+    fd = init_fd_out(inf);
     test = malloc(sizeof(char) * 1000);
     if (!test)
         return ;

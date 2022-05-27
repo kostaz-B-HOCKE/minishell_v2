@@ -53,6 +53,8 @@ typedef struct	s_info
     int     is_dollar;
     int     flag_pipe;
 
+    int     fd_in;
+    int     fd_out;
 
     t_pipe  *pipe_lst;
     t_link  *link;
@@ -85,6 +87,10 @@ char    *ft_pipex_cutting(char *input, int *i, t_info *inf);
 
 //redirect1.c
 char *ft_redirect1(char *str, int *i, t_info *inf);
+
+//init_fds.c
+int init_fd_out(t_info *inf);
+int init_fd_in(t_info *inf);
 
 //list_command.c and list_command_util.c and list_pipe.c
 void    link_to_str(char *str, t_info *inf);

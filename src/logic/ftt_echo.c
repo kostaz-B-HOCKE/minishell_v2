@@ -33,7 +33,9 @@ void    ftt_echo(t_info *inf)
 {
     int i;
     char    **arg;
+    int fd;
 
+    fd = init_fd_out(inf);
     arg = porting_link_str(inf);
     i = 0;
     if (!arg[1])
@@ -43,11 +45,12 @@ void    ftt_echo(t_info *inf)
     }
     while (arg[++i])
     {
-        printf("%s", arg[i]);
-        printf(" ");
+        ft_putstr_fd(arg[i], fd);
+        ft_putstr_fd(" ", fd);
+//        ft_putendl_fd(" ", fd);
     }
     while (arg[i] && ft_strncmp(arg[i], "-n", 3))
         i++;
-    printf("\n");
+    ft_putstr_fd("\n", fd);
     free_arr(arg);
 }

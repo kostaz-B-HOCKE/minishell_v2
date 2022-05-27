@@ -50,10 +50,8 @@ int main(int ac, char **argv, char **env)
     t_info	*inf;
 
 //    printf("%sGO%s\n", RED, RESET);
-    if (env) {
-        gl_exit = 0;
-        inf = init_info(env);
-    }
+    gl_exit = 0;
+    inf = init_info(env);
     shell_level(inf);
 
 //	printf("__/__/__/__/__/__/__/__/__/__/__/\n");

@@ -101,6 +101,8 @@ t_info	*init_info(char **env)
         inf->is_dollar = 0;
         inf->link = NULL;
         inf->pipe_lst = NULL;
+        inf->fd_in = -1;
+        inf->fd_out = -1;
         env_move(inf, env);
         minishell_patch(inf);
         return (inf);

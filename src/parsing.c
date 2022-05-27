@@ -83,19 +83,20 @@ char    *ft_chek_redirect(char *str, int *i, t_info *inf)
 char    *chek_symbol_str(t_info *inf, char *str, int *i)
 {
     while (str[++(*i)]) {
-//        printf("do %s\n", str);
-        if (str[*i] == '\'')
+//        printf("do:%s\n", str);
+        if (str[*i] && (str[*i] == '\''))
             str = ft_gap(str, i, '\'');
         else if (str[*i] && str[*i] == '\"')
             str = ft_gap2(str, i, '\"', inf);
-        else if (str[*i] == '$' && (ft_isalnum(str[*i + 1]) || str[*i + 1] == '?'))
+        else if (str[*i] && (str[*i] == '$' && (ft_isalnum(str[*i + 1]) || str[*i + 1] == '?')))
             str = ft_dollar_pv(str, i, porting_env(inf));
-        else if (str[*i] == '|')
+        else if (str[*i] && (str[*i] == '|'))
             str = ft_pipex_cutting(str, i, inf);
-//		else if (str[*i] == '>' || str[*i] == '<')
-//			str = ft_chek_redirect(str, i, inf);
-        else if (str[*i] && str[*i] == ' ')
+		else if (str[*i] && (str[*i] == '>' || str[*i] == '<'))
+			str = ft_chek_redirect(str, i, inf);
+        else if (str[*i] && str[*i] == ' ') {
             str = parse_spaces(str, i, inf);
+        }
         if (!str)
             return (NULL);
     }
@@ -103,7 +104,8 @@ char    *chek_symbol_str(t_info *inf, char *str, int *i)
         link_to_str(str, inf);
     }
     pipe_fill_in(inf);
-//    print_me_pipels(inf);
+
+    print_me_pipels(inf);
     return (str);
 }
 
@@ -119,6 +121,6 @@ void    parsing_s(t_info *inf, char *str)
     }
     str = delete_spese(str);
     str = chek_symbol_str(inf, str,	&i);
-//    printf("finish chek_symbol\n");
+    //требуется функция pipe
     cheak_cmd(inf);
 }
